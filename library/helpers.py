@@ -1,7 +1,6 @@
 from models.inventory import Inventory
 from models.master import Master
 from models.store import Store
-from cli import menu
 from seed import seed_database
 import platform
 import os
@@ -86,7 +85,7 @@ def total_inventory_worth_per_item():
 def store_total_inventory_worth_per_item():
     pass
 
-def password_correct():
+def password_correct(main):
     os.system(sweep_up_shop)
     print("Hello User, are you sure you want to reset the database?")
     print("Note: This will seed the database with sample data")
@@ -95,21 +94,21 @@ def password_correct():
     if yn == "Y" or "y":
         reset()
     elif yn == "N" or "n":
-        menu()
+        main()
     else:
         print("Invalid Input")
 
-def password_incorrect():
+def password_incorrect(main):
     os.system(sweep_up_shop)
     print("Password Incorrect")
     time.sleep(2)
     print("Loser")
     time.sleep(1)
-    menu()
+    main()
 
-def reset():
+def reset(main):
     os.system(sweep_up_shop)
     print("Working...")
     time.sleep(3)
     seed_database()
-    menu()
+    main()
