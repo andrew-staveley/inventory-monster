@@ -40,4 +40,4 @@ def seed_database():
     Inventory.create(y2.id, x5.id, 6)
 
 
-seed_database()
+#seed_database()
