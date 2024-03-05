@@ -170,9 +170,9 @@ def reset_database_menu():
         reset_database_text()
         password_entered = input(">>> ")
         if password_entered == "password":
-            password_correct()
+            password_correct(main)
         else:
-            password_incorrect()
+            password_incorrect(main)
 def menu():
     sweep_up_shop()
     print("Welcome to Inventory Monster")
