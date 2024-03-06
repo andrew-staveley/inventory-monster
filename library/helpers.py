@@ -6,8 +6,7 @@ import platform
 import os
 import time
 
-def sweep_up_shop():
-    os.system('cls' if platform.system() == 'Windows' else 'clear')
+sweep_up_shop = 'cls' if platform.system() == 'Windows' else 'clear'
 
 def exit_program():
     os.system(sweep_up_shop)

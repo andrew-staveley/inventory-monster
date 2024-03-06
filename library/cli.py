@@ -1,3 +1,4 @@
+import os
 from helpers import (
     sweep_up_shop,
     exit_program,
@@ -84,7 +85,7 @@ def edit_store_list_menu():
             print("Invalid Choice")
 
 def edit_store_stock_menu():
-    sweep_up_shop()
+    os.system(sweep_up_shop)
     store_id = input("Please enter the ID of the store to change inventory: ")
     while True:
         edit_store_stock_text(store_id)
@@ -133,7 +134,7 @@ def find_store_menu():
             print("Invalid Choice")
 
 def store_stock_menu():
-    sweep_up_shop()
+    os.system(sweep_up_shop)
     store_id = input("Enter the Store ID for Inventory Searches: ")
     while True:
         store_stock_text()
@@ -150,7 +151,7 @@ def store_stock_menu():
             print("Invalid Choice")
 
 def total_inventory_menu():
-    sweep_up_shop()
+    os.system(sweep_up_shop)
     while True:
         total_inventory_text()
         choice = input("> ")
@@ -174,7 +175,7 @@ def reset_database_menu():
         else:
             password_incorrect(main)
 def menu():
-    sweep_up_shop()
+    os.system(sweep_up_shop)
     print("Welcome to Inventory Monster")
     print("Please Select an Option Below:")
     print("0. Exit Program")
@@ -188,7 +189,7 @@ def menu():
     print("8. Reset Database")
 
 def edit_items_master_list_text():
-    sweep_up_shop()
+    os.system(sweep_up_shop)
     print("* EDITING ITEMS IN MASTER LIST *")
     print("Please Select an Option Below:")
     print("0. Main Menu")
@@ -197,7 +198,7 @@ def edit_items_master_list_text():
     print("3. Update Item from Master List")
 
 def edit_store_list_text():
-    sweep_up_shop()
+    os.system(sweep_up_shop)
     print("* EDITING STORE LIST *")
     print("Please Select an Option Below:")
     print("0. Main Menu")
@@ -206,7 +207,7 @@ def edit_store_list_text():
     print("3. Update a Store from List")
 
 def edit_store_stock_text(store_name):
-    sweep_up_shop()
+    os.system(sweep_up_shop)
     print(f"* EDITING {store_name} *")
     print("0. Main Menu")
     print("1. Add New Item to Store Inventory")
@@ -214,7 +215,7 @@ def edit_store_stock_text(store_name):
     print("3. Update Item in Store Inventory")
 
 def find_item_master_text():
-    sweep_up_shop()
+    os.system(sweep_up_shop)
     print("How would you like to search for your item?")
     print("Please select an option.")
     print("0. Main Menu")
@@ -224,7 +225,7 @@ def find_item_master_text():
     print("4. List All Items in Master Inventory")
 
 def find_store_text():
-    sweep_up_shop()
+    os.system(sweep_up_shop)
     print("How would you like to search for the store?")
     print("0. Main Menu")
     print("1. By ID")
@@ -232,7 +233,7 @@ def find_store_text():
     print("3. List All Stores")
 
 def store_stock_text(store_id):
-    sweep_up_shop()
+    os.system(sweep_up_shop)
     print(f"How would you like to lookup Store #{store_id}")
     print("0. Main Menu")
     print("1. By ID")
@@ -240,7 +241,7 @@ def store_stock_text(store_id):
     print("3. Show Entire Stock")
 
 def total_inventory_text():
-    sweep_up_shop()
+    os.system(sweep_up_shop)
     print("Which inventory would you like the value of?")
     print("Please select one below:")
     print("0. Main Menu")
@@ -250,7 +251,7 @@ def total_inventory_text():
     print("4. Total inventory of a specific item in one store")
 
 def reset_database_text():
-    sweep_up_shop()
+    os.system(sweep_up_shop)
     print("To enter admin controls, please enter password:")
 
 if __name__ == "__main__":
