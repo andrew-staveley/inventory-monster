@@ -26,18 +26,18 @@ def seed_database():
     y2 = Store.create("Downtown Crossing - Boston", "322 Tremont St, Boston, MA")
 
     #Store Inventory for Store 1 
-    Inventory.create(y1.id, x3.id, 66)
-    Inventory.create(y1.id, x2.id, 12)
-    Inventory.create(y1.id, x1.id, 20)
-    Inventory.create(y1.id, x4.id, 2)
-    Inventory.create(y1.id, x5.id, 1)
+    Inventory.create(1, y1.id, x3.id, 66)
+    Inventory.create(1, y1.id, x2.id, 12)
+    Inventory.create(1, y1.id, x1.id, 20)
+    Inventory.create(1, y1.id, x4.id, 2)
+    Inventory.create(1, y1.id, x5.id, 1)
 
     #Store Inventory for Store 2
-    Inventory.create(y2.id, x1.id, 19)
-    Inventory.create(y2.id, x2.id, 100)
-    Inventory.create(y2.id, x3.id, 45)
-    Inventory.create(y2.id, x4.id, 3)
-    Inventory.create(y2.id, x5.id, 6)
+    Inventory.create(2, y2.id, x1.id, 19)
+    Inventory.create(2, y2.id, x2.id, 100)
+    Inventory.create(2, y2.id, x3.id, 45)
+    Inventory.create(2, y2.id, x4.id, 3)
+    Inventory.create(2, y2.id, x5.id, 6)
 
 
 seed_database()
