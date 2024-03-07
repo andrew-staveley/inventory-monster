@@ -48,8 +48,9 @@ class Master:
         sql = """
             CREATE TABLE IF NOT EXISTS master (
             id INTEGER PRIMARY KEY,
-            name TEXT
-            location TEXT)
+            desc TEXT,
+            sku INT,
+            price FLOAT)
         """
         CURSOR.execute(sql)
         CONN.commit()
