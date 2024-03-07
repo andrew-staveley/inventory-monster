@@ -1,8 +1,7 @@
 from models.__init__ import CURSOR, CONN
-from models.store import Store
 from models.master import Master
 
-class Inventory:
+class Store_Two:
     
     all = {}
 
@@ -18,7 +17,7 @@ class Inventory:
     
     @store_id.setter
     def store_id(self, store_id):
-        if type(store_id) is int and Store.find_by_id(store_id):
+        if type(store_id) is int and Store_Two.find_by_id(store_id):
             self._store_id = store_id
         else:
             raise ValueError("Store ID must match with a store. Use 'List Stores' to see each store's ID.")

@@ -1,6 +1,7 @@
-from models.inventory import Inventory
+from library.models.store_one import Store_One
+from models.store_two import Store_Two
+from models.store_three import Store_Three
 from models.master import Master
-from models.store import Store
 from seed import seed_database
 import platform
 import os
@@ -15,73 +16,52 @@ def exit_program():
     os.system(sweep_up_shop)
     exit()
 
-def full_master_list():
-    pass
-
-def update_master_list():
-    pass
-
 def add_master_list():
     pass
 
 def remove_master_list():
     pass
 
-def find_item_by_name():
+def update_master_list():
     pass
 
-def find_item_by_id():
+def add_store_inv():
     pass
 
-def find_item_by_sku():
+def remove_store_inv():
     pass
 
-def list_stores():
+def update_store_inv():
     pass
 
-def add_store():
+def view_item_by_id():
     pass
 
-def remove_store():
+def view_item_by_desc():
     pass
 
-def update_store():
+def view_item_by_name():
     pass
 
-def add_stock():
+def view_all_items():
     pass
 
-def remove_stock():
+def view_stock_by_id():
     pass
 
-def update_stock():
+def view_stock_by_sku():
     pass
 
-def list_items_store():
+def view_stock_by_desc():
     pass
 
-def find_store_by_id():
-    pass
-
-def find_store_by_name():
-    pass
-
-def check_store_stock_by_id():
-    pass
-
-def check_store_stock_by_name():
+def view_all_stock():
     pass
 
 def total_inventory_worth():
     pass
 
-def store_total_inventory_worth():
-    pass
-
-def total_inventory_worth_per_item():
-    pass
-
-def store_total_inventory_worth_per_item():
+def store_inventory_worth():
     pass
 
 def password_correct(main):
