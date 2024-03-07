@@ -94,6 +94,12 @@ class Inventory:
         self.id = None
 
     @classmethod
+    def create(cls, table_id, store_id, item_id, stock):
+        item = cls(store_id, item_id, stock)
+        item.save(table_id)
+        return item
+
+    @classmethod
     def instance_from_db(cls, row):
         item = cls.all.get(row[0])
         if item:
