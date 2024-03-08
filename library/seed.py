@@ -3,7 +3,6 @@ from models.master import Master
 from models.store_one import Store_One
 from models.store_two import Store_Two
 from models.store_three import Store_Three
-import ipdb
 
 def seed_database():
     #Table Reset
@@ -40,5 +39,3 @@ def seed_database():
     Store_Three.create(item3.id, 239)
     Store_Three.create(item4.id, 5)
     Store_Three.create(item5.id, 21)
-
-seed_database()
