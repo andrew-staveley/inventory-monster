@@ -45,57 +45,57 @@ class Store_One:
             raise ValueError("Stock must be an integer")
         
     @classmethod
-    def create_table(cls, table_id):
+    def create_table(cls):
         sql = """
-            CREATE TABLE IF NOT EXISTS ?
+            CREATE TABLE IF NOT EXISTS store_one
             id INTEGER PRIMARY KEY,
             item_id INT,
             store_id INT,
             stock INT,
         """
-        CURSOR.execute(sql, (table_id))
+        CURSOR.execute(sql)
         CONN.commit()
 
     @classmethod
-    def drop_table(cls, table_id):
+    def drop_table(cls):
         sql = """
-            DROP TABLE IF EXISTS ?
+            DROP TABLE IF EXISTS store_one
         """
-        CURSOR.execute(sql, (table_id))
+        CURSOR.execute(sql)
 
-    def save(self, table_id):
+    def save(self):
         sql = """
-            INSERT INTO ? (store_id, item_id, stock)
+            INSERT INTO store_one (store_id, item_id, stock)
             VALUES (?, ?, ?)
         """
-        CURSOR.execute(sql, (table_id, self.store_id, self.item_id, self.stock))
+        CURSOR.execute(sql, (self.store_id, self.item_id, self.stock))
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
 
-    def update(self, table_id):
+    def update(self):
         sql = """
-            UPDATE ?
+            UPDATE store_one
             SET store_id = ?, item_id = ?, stock= ?
             WHERE id = ?
         """
-        CURSOR.execute(sql(table_id, self.store_id, self.item_id, self.stock))
+        CURSOR.execute(sql(self.store_id, self.item_id, self.stock))
         CONN.commit()
 
-    def delete(self, table_id):
+    def delete(self):
         sql = """
-            DELETE FROM ?
+            DELETE FROM store_one
             WHERE id = ?
         """
-        CURSOR.execute(sql, (table_id, self.id,))
+        CURSOR.execute(sql, (self.id,))
         CONN.commit()
         del type(self).all[self.id]
         self.id = None
 
     @classmethod
-    def create(cls, table_id, store_id, item_id, stock):
+    def create(cls, store_id, item_id, stock):
         item = cls(store_id, item_id, stock)
-        item.save(table_id)
+        item.save()
         return item
 
     @classmethod
@@ -112,30 +112,30 @@ class Store_One:
         return item
     
     @classmethod
-    def get_all(cls, table_id):
+    def get_all(cls):
         sql = """
             SELECT *
-            FROM ?
+            FROM store_one
         """
-        rows = CURSOR.execute(sql, (table_id)).fetchall()
+        rows = CURSOR.execute(sql).fetchall()
         return [cls.instance_from_db(row) for row in rows]
     
     @classmethod
-    def find_by_id(cls, table_id, id):
+    def find_by_id(cls, id):
         sql = """
             SELECT *
-            FROM ?
+            FROM store_one
             WHERE id = ?
         """
-        row = CURSOR.execute(sql, (table_id, id)).fetchone()
+        row = CURSOR.execute(sql, (id)).fetchone()
         return cls.instance_from_db(row) if row else None
     
     @classmethod
-    def find_by_name(cls, table_id, name):
+    def find_by_name(cls, name):
         sql = """"
             SELECT *
-            FROM ?
+            FROM store_one
             WHERE name is ?
         """
-        row = CURSOR.execute(sql, (table_id, name)).fetchone()
+        row = CURSOR.execute(sql, (name)).fetchone()
         return cls.instance_from_db(row) if row else None
