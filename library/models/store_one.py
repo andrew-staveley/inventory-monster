@@ -5,22 +5,10 @@ class Store_One:
     
     all = {}
 
-    def __init__(self, store_id, item_id, stock, id=None):
+    def __init__(self, item_id, stock, id=None):
         self.id = id
-        self.store_id = store_id
         self.item_id = item_id
         self.stock = stock
-
-    @property
-    def store_id(self):
-        return self._store_id
-    
-    @store_id.setter
-    def store_id(self, store_id):
-        if type(store_id) is int and Store_One.find_by_id(store_id):
-            self._store_id = store_id
-        else:
-            raise ValueError("Store ID must match with a store. Use 'List Stores' to see each store's ID.")
         
     @property
     def item_id(self):
@@ -47,11 +35,10 @@ class Store_One:
     @classmethod
     def create_table(cls):
         sql = """
-            CREATE TABLE IF NOT EXISTS store_one
+            CREATE TABLE IF NOT EXISTS store_one (
             id INTEGER PRIMARY KEY,
             item_id INT,
-            store_id INT,
-            stock INT,
+            stock INT)
         """
         CURSOR.execute(sql)
         CONN.commit()
@@ -65,10 +52,10 @@ class Store_One:
 
     def save(self):
         sql = """
-            INSERT INTO store_one (store_id, item_id, stock)
-            VALUES (?, ?, ?)
+            INSERT INTO store_one (item_id, stock)
+            VALUES (?, ?)
         """
-        CURSOR.execute(sql, (self.store_id, self.item_id, self.stock))
+        CURSOR.execute(sql, (self.item_id, self.stock))
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
@@ -76,10 +63,10 @@ class Store_One:
     def update(self):
         sql = """
             UPDATE store_one
-            SET store_id = ?, item_id = ?, stock= ?
+            SET item_id = ?, stock= ?
             WHERE id = ?
         """
-        CURSOR.execute(sql(self.store_id, self.item_id, self.stock))
+        CURSOR.execute(sql(self.item_id, self.stock, self.id))
         CONN.commit()
 
     def delete(self):
@@ -93,8 +80,8 @@ class Store_One:
         self.id = None
 
     @classmethod
-    def create(cls, store_id, item_id, stock):
-        item = cls(store_id, item_id, stock)
+    def create(cls, item_id, stock):
+        item = cls(item_id, stock)
         item.save()
         return item
 
@@ -102,11 +89,10 @@ class Store_One:
     def instance_from_db(cls, row):
         item = cls.all.get(row[0])
         if item:
-            item.store_id = row[1]
-            item.item_id = row[2]
-            item.stock = row[3]
+            item.item_id = row[1]
+            item.stock = row[2]
         else:
-            item = cls(row[1], row[2], row[3])
+            item = cls(row[1], row[2])
             item.id = row[0]
             cls.all[item.id] = item
         return item

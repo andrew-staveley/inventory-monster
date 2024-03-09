@@ -47,11 +47,11 @@ class Store_Three:
     @classmethod
     def create_table(cls):
         sql = """
-            CREATE TABLE IF NOT EXISTS store_three
+            CREATE TABLE IF NOT EXISTS store_three (
             id INTEGER PRIMARY KEY,
             item_id INT,
             store_id INT,
-            stock INT,
+            stock INT)
         """
         CURSOR.execute(sql)
         CONN.commit()
@@ -93,8 +93,8 @@ class Store_Three:
         self.id = None
 
     @classmethod
-    def create(cls, store_id, item_id, stock):
-        item = cls(store_id, item_id, stock)
+    def create(cls, item_id, stock):
+        item = cls(item_id, stock)
         item.save()
         return item
 
