@@ -27,10 +27,10 @@ class Master:
     
     @sku.setter
     def sku(self, sku):
-        if isinstance(sku, int) and (len(sku) >= 3 and len(sku) <= 10):
+        if isinstance(int(sku), int):
             self._sku = sku
         else:
-            raise ValueError("SKU must be an integer between 3 and 10 characters")
+            raise ValueError("SKU must be an integer")
         
     @property
     def price(self):
@@ -38,10 +38,10 @@ class Master:
     ### Update price formatting requirements###
     @price.setter
     def price(self, price):
-        if isinstance(price, float) and (price > 0.00):
+        if isinstance(float(price), float):
             self._price = price
         else:
-            raise ValueError("Price must be a number with two decimals, greater than 0.00")
+            raise ValueError("Price must be a number with a decimal point")
         
     @classmethod
     def create_table(cls):
@@ -85,7 +85,7 @@ class Master:
             SET desc = ?, sku = ?, price = ?
             WHERE id = ?
         """
-        CURSOR.execute(sql, (self.desc, self.sku, self.price))
+        CURSOR.execute(sql, (self.desc, self.sku, self.price, self.id))
         CONN.commit()
 
     def delete(self):
@@ -93,7 +93,7 @@ class Master:
             DELETE FROM master
             WHERE id = ?
         """
-        CURSOR.execute(sql, (self.id))
+        CURSOR.execute(sql, (self.id,))
         CONN.commit()
         del type(self).all[self.id]
         self.id = None
