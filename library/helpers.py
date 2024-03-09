@@ -1,8 +1,7 @@
-from library.models.store_one import Store_One
+from models.store_one import Store_One
 from models.store_two import Store_Two
 from models.store_three import Store_Three
 from models.master import Master
-from seed import seed_database
 import platform
 import os
 import time
@@ -17,13 +16,82 @@ def exit_program():
     exit()
 
 def add_master_list():
-    pass
+    desc = input("Please Enter Item Desc: ")
+    sku = input("Please Enter SKU: ")
+    price = input("Please Enter Price in XXXX.xx Format: ")
+    try:
+        Master.create(desc, sku, price)
+        os.system(sweep_up_shop)
+        print(f"Success! Item {desc} Added")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
+    except Exception as exc:
+        os.system(sweep_up_shop)
+        print("Error Creating Item")
+        print("")
+        print(exc)
+        print("")
+        print("Press Enter To Continue")
+        print("")
+        input("> ")
 
 def remove_master_list():
-    pass
+    item_id = input("Enter the Item ID: ")
+    if item_id := Master.find_by_id(item_id):
+        item_id.delete()
+        os.system(sweep_up_shop)
+        print(f"Item {item_id} has been deleted successfully.")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
+    else:
+        os.system(sweep_up_shop)
+        print(f"Error Removing Item {item_id}")
+        print("")
+        print("Item not found. Please double-check ID")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
+
 
 def update_master_list():
-    pass
+    item_id = input("Enter the Item ID: ")
+    if item_id := Master.find_by_id(item_id):
+        try:
+            desc = input("Enter new item description: ")
+            item_id.desc = desc
+            sku = input("Enter new item SKU: ")
+            item_id.sku = sku
+            price = input("Enter new item price: ")
+            item_id.price = price
+            item_id.update()
+            os.system(sweep_up_shop)
+            print(f"Success in updating item {item_id}")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        except Exception as exc:
+            os.system(sweep_up_shop)
+            print(f"Error updating item {item_id}")
+            print("")
+            print(exc)
+            print("")
+            print("Press Enter to Continue")
+            input("> ")
+    else:
+        os.system(sweep_up_shop)
+        print(f"Error Updating {item_id}")
+        print("")
+        print("Item not found. Double-check item ID.")
+        print("")
+        print("Press Enter to Continue")
+        print("> ")
+
 
 def add_store_inv():
     pass
@@ -63,31 +131,3 @@ def total_inventory_worth():
 
 def store_inventory_worth():
     pass
-
-def password_correct(main):
-    os.system(sweep_up_shop)
-    print("Hello User, are you sure you want to reset the database?")
-    print("Note: This will seed the database with sample data")
-    print("Y / N")
-    yn = input(">>> ")
-    if yn == "Y" or "y":
-        reset()
-    elif yn == "N" or "n":
-        main()
-    else:
-        print("Invalid Input")
-
-def password_incorrect(main):
-    os.system(sweep_up_shop)
-    print("Password Incorrect")
-    time.sleep(2)
-    print("Loser")
-    time.sleep(1)
-    main()
-
-def reset(main):
-    os.system(sweep_up_shop)
-    print("Working...")
-    time.sleep(3)
-    seed_database()
-    main()
