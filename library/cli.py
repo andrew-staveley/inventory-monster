@@ -1,5 +1,7 @@
 from models.__init__ import CONN, CURSOR
+from seed import seed_database
 import os
+import time
 from helpers import (
     sweep_up_shop,
     exit_program,
@@ -19,9 +21,6 @@ from helpers import (
     view_all_stock,
     total_inventory_worth,
     store_inventory_worth,
-    password_correct,
-    password_incorrect,
-    reset,
     )
 
 def main():
@@ -43,9 +42,10 @@ def main():
         elif choice == "6":
             total_items_menu()
         elif choice == "7":
-            reset_database_menu()
+            reset_database_menu(main)
         else:
             print("Invalid Choice")
+            time.sleep(2)
 
 def edit_master_list_menu():
     while True:
@@ -61,26 +61,32 @@ def edit_master_list_menu():
             update_master_list()
         else:
             print("Invalid Choice")
+            time.sleep(2)
 
 # STORE_ID VALIDATION NEEDED
 def edit_store_list_menu():
     os.system(sweep_up_shop)
     store_list_text()
-    store_id = input("> ")
-    os.system(sweep_up_shop)
-    while True:
-        edit_store_list_text(store_id)
-        choice = input("> ")
-        if choice == "0":
-            main()
-        elif choice == "1":
-            add_store_inv()
-        elif choice == "2":
-            remove_store_inv()
-        elif choice == "3":
-            update_store_inv()
-        else:
-            print("Invalid Choice")
+    store = input("> ")
+    if store is "1" or "2" or "3":
+        os.system(sweep_up_shop)
+        while True:
+            edit_store_list_text(store)
+            choice = input("> ")
+            if choice == "0":
+                main()
+            elif choice == "1":
+                add_store_inv()
+            elif choice == "2":
+                remove_store_inv()
+            elif choice == "3":
+                update_store_inv()
+            else:
+                print("Invalid Choice")
+                time.sleep(2)
+    else:
+        print("Invalid Option")
+        time.sleep(2)
 
 def view_item_menu():
     while True:
@@ -98,13 +104,15 @@ def view_item_menu():
             view_all_items()
         else:
             print("Invalid Choice")
+            time.sleep(2)
+
 #ALSO NEEDS STORE VALIDATION
 def view_stock_menu():
     os.system(sweep_up_shop)
     store_list_text()
-    input("> ")
+    store = input("> ")
     while True:
-        view_stock_text()
+        view_stock_text(store)
         choice = input("> ")
         if choice == "0":
             main()
@@ -118,6 +126,7 @@ def view_stock_menu():
             view_all_stock()
         else:
             print("Invalid Choice")
+            time.sleep(2)
 
 def total_inventory_menu():
     os.system(sweep_up_shop)
@@ -132,18 +141,43 @@ def total_inventory_menu():
             store_inventory_worth()
         else:
             print("Invalid Option")
+            time.sleep(2)
 
 def total_items_menu():
     pass
 
-def reset_database_menu():
+def reset_database_menu(cb):
     while True:
         reset_database_text()
         password_entered = input(">>> ")
         if password_entered == "password":
-            password_correct(main)
+            os.system(sweep_up_shop)
+            print("Hello User, are you sure you want to reset the database?")
+            print("Note: This will seed the database with sample data")
+            print("y / n")
+            yn = input(">>> ")
+            if yn == "y":
+                os.system(sweep_up_shop)
+                print("Working...")
+                time.sleep(3)
+                seed_database()
+                print("Success")
+                print("")
+                print("Press Enter to Continue")
+                print("")
+                input("> ")
+                main()
+            elif yn == "n":
+                main()
+            else:
+                print("Invalid Input")
+                time.sleep(2)
         else:
-            password_incorrect(main)
+            os.system(sweep_up_shop)
+            print("Password Incorrect")
+            time.sleep(2)
+            os.system(sweep_up_shop)
+            main()
 
 def menu():
     os.system(sweep_up_shop)
@@ -155,7 +189,8 @@ def menu():
     print("3. View Item Information")
     print("4. View Item Stock")
     print("5. Inventory Worth")
-    print("6. Admin")
+    print("6. Total Inventory (Under Construction)")
+    print("7. Admin")
 
 def edit_master_list_text():
     os.system(sweep_up_shop)
@@ -177,16 +212,9 @@ def edit_store_list_text(store_id):
 
 def store_list_text():
     print("Please Select a Store Below")
-    sql = """
-        SELECT *
-        FROM sys.Tables
-    """
-    tables = CURSOR.execute(sql).fetchall()
-    for table in tables:
-        if table == "master":
-            pass
-        else:
-            print(f"{table}")
+    print("1. Store One")
+    print("2. Store Two")
+    print("3. Store Three")
 
 
 def view_item_text():
@@ -201,7 +229,7 @@ def view_item_text():
 
 def view_stock_text(store_id):
     os.system(sweep_up_shop)
-    print(f"How would you like to lookup Store #{store_id}")
+    print(f"* VIEWING INVENTORY FOR STORE {store_id} *")
     print("0. Main Menu")
     print("1. By ID")
     print("2. By Name")
