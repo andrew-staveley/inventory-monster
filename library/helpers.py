@@ -304,16 +304,44 @@ def update_store_inv(store):
         input("> ")
 
 def view_item_by_id():
-    pass
+    id_ = input("Enter the item's id: ")
+    item = Master.find_by_id(id_)
+    os.system(sweep_up_shop)
+    print(item) if item else print(f'Item {id_} not found')
+    print("")
+    print("Press Enter to Continue")
+    print("")
+    input("> ")
 
 def view_item_by_desc():
-    pass
+    desc = input("Enter the item's description: ")
+    item = Master.find_by_desc(desc)
+    os.system(sweep_up_shop)
+    print(item) if item else print(f"Item {desc} not found")
+    print("")
+    print("Press Enter to Continue")
+    print("")
+    input("> ")
 
-def view_item_by_name():
-    pass
+def view_item_by_sku():
+    sku = input("Enter the item's SKU: ")
+    sku_num = int(sku)
+    item = Master.find_by_sku(sku_num)
+    os.system(sweep_up_shop)
+    print(item) if item else print(f"Item {sku} not found")
+    print("")
+    print("Press Enter to Continue")
+    print("")
+    input("> ")
 
 def view_all_items():
-    pass
+    items = Master.get_all()
+    for item in items:
+        print(item)
+    print("")
+    print("Press Enter to Continue")
+    print("")
+    input("> ")
 
 def view_stock_by_id():
     pass
