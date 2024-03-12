@@ -9,6 +9,9 @@ class Store_Three:
         self.id = id
         self.item_id = item_id
         self.stock = stock
+
+    def __repr__(self):
+        return f"<<>>\n\nID: {self.id}\nItem ID: {self.item_id}\nStock: {self.stock}\n\n<<>>"
         
     @property
     def item_id(self):

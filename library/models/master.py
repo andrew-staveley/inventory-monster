@@ -10,6 +10,9 @@ class Master:
         self.sku = sku
         self.price = price
 
+    def __repr__(self):
+        return f"<<>>\n\nID: {self.id}\nDesc: {self.desc}\nSKU: {self.sku}\nPrice: {self.price}\n\n<<>>"
+
     @property
     def desc(self):
         return self._desc
@@ -138,4 +141,14 @@ class Master:
             WHERE desc is ?
         """
         row = CURSOR.execute(sql, (desc,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def find_by_sku(cls, sku):
+        sql = """
+            SELECT *
+            FROM master
+            WHERE sku is ?
+        """
+        row = CURSOR.execute(sql, (sku,)).fetchone()
         return cls.instance_from_db(row) if row else None
