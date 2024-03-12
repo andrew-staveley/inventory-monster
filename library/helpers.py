@@ -93,14 +93,215 @@ def update_master_list():
         print("> ")
 
 
-def add_store_inv():
-    pass
+def add_store_inv(store):
+    if store == "1":
+        item_id = input("Please enter the ID of an item from master: ")
+        stock = input("Please enter the stock amount: ")
+        try:
+            os.system(sweep_up_shop)
+            store_item = Store_One.create(int(item_id), int(stock))
+            print(f"Success! Item {store_item} has been added.")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        except Exception as exc:
+            os.system(sweep_up_shop)
+            print("Error adding stock.")
+            print("")
+            print(exc)
+            print("")
+            print("Press Enter to Continue")
+            input("> ")
+    elif store == "2":
+        item_id = input("Please enter the ID of an item from master: ")
+        stock = input("Please enter the stock amount: ")
+        try:
+            os.system(sweep_up_shop)
+            store_item = Store_Two.create(int(item_id), int(stock))
+            print(f"Success! Item {store_item} has been added.")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        except Exception as exc:
+            os.system(sweep_up_shop)
+            print("Error adding stock.")
+            print("")
+            print(exc)
+            print("")
+            print("Press Enter to Continue")
+            input("> ")
+    elif store == "3":
+        item_id = input("Please enter the ID of an item from master: ")
+        stock = input("Please enter the stock amount: ")
+        try:
+            os.system(sweep_up_shop)
+            store_item = Store_Three.create(int(item_id), int(stock))
+            print(f"Success! Item {store_item} has been added.")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        except Exception as exc:
+            os.system(sweep_up_shop)
+            print("Error adding stock.")
+            print("")
+            print(exc)
+            print("")
+            print("Press Enter to Continue")
+            input("> ")
+    else:
+        os.system(sweep_up_shop)
+        print("Error")
+        print("")
+        print("Store does not exist. Double check store")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
 
-def remove_store_inv():
-    pass
+def remove_store_inv(store):
+    if store == "1":
+        item_id = input("Please Enter Item ID: ")
+        if store := Store_One.find_by_id(item_id):
+            store.delete()
+            os.system(sweep_up_shop)
+            print("Item has been removed from the master list.")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        else:
+            os.system(sweep_up_shop)
+            print("Error Deleting Item")
+            print("")
+            print("Item not Found.")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+    elif store == "2":
+        item_id = input("Please Enter Item ID: ")
+        if store := Store_Two.find_by_id(item_id):
+            store.delete()
+            os.system(sweep_up_shop)
+            print("Item has been removed from the master list.")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        else:
+            os.system(sweep_up_shop)
+            print("Error Deleting Item")
+            print("")
+            print("Item not Found.")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+    elif store == "3":
+        item_id = input("Please Enter Item ID: ")
+        if store := Store_Three.find_by_id(item_id):
+            store.delete()
+            os.system(sweep_up_shop)
+            print("Item has been removed from the master list.")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        else:
+            os.system(sweep_up_shop)
+            print("Error Deleting Item")
+            print("")
+            print("Item not Found.")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+    else:
+        os.system(sweep_up_shop)
+        print("Error")
+        print("")
+        print("Store does not exist. Double check store")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
 
-def update_store_inv():
-    pass
+def update_store_inv(store):
+    if store == "1":
+        item_id = input("Please Enter Item ID: ")
+        if store := Store_One.find_by_id(item_id):
+            try:
+                stock = input("Enter Stock: ")
+                store.stock = stock
+                os.system(sweep_up_shop)
+                store.update()
+                print("Success. Item Updated")
+                print("")
+                print("Press Enter to Continue")
+                print("")
+                input("> ")
+            except Exception as exc:
+                print("Error Updating Item")
+                print("")
+                print(exc)
+                print("")
+                print("Press Enter to Continue")
+                print("")
+                input("> ")
+    elif store == "2":
+        item_id = input("Please Enter Item ID: ")
+        if store := Store_Two.find_by_id(item_id):
+            try:
+                stock = input("Enter Stock: ")
+                store.stock = stock
+                os.system(sweep_up_shop)
+                store.update()
+                print("Success. Item Updated")
+                print("")
+                print("Press Enter to Continue")
+                print("")
+                input("> ")
+            except Exception as exc:
+                print("Error Updating Item")
+                print("")
+                print(exc)
+                print("")
+                print("Press Enter to Continue")
+                print("")
+                input("> ")
+    elif store == "3":
+        item_id = input("Please Enter Item ID: ")
+        if store := Store_Three.find_by_id(item_id):
+            try:
+                stock = input("Enter Stock: ")
+                store.stock = stock
+                os.system(sweep_up_shop)
+                store.update()
+                print("Success. Item Updated")
+                print("")
+                print("Press Enter to Continue")
+                print("")
+                input("> ")
+            except Exception as exc:
+                print("Error Updating Item")
+                print("")
+                print(exc)
+                print("")
+                print("Press Enter to Continue")
+                print("")
+                input("> ")
+    else:
+        os.system(sweep_up_shop)
+        print("Error")
+        print("")
+        print("Store does not exist. Double check store")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
 
 def view_item_by_id():
     pass
