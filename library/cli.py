@@ -68,25 +68,21 @@ def edit_store_list_menu():
     os.system(sweep_up_shop)
     store_list_text()
     store = input("> ")
-    if store is "1" or "2" or "3":
-        os.system(sweep_up_shop)
-        while True:
-            edit_store_list_text(store)
-            choice = input("> ")
-            if choice == "0":
-                main()
-            elif choice == "1":
-                add_store_inv()
-            elif choice == "2":
-                remove_store_inv()
-            elif choice == "3":
-                update_store_inv()
-            else:
-                print("Invalid Choice")
-                time.sleep(2)
-    else:
-        print("Invalid Option")
-        time.sleep(2)
+    os.system(sweep_up_shop)
+    while True:
+        edit_store_list_text(store)
+        choice = input("> ")
+        if choice == "0":
+            main()
+        elif choice == "1":
+            add_store_inv(store)
+        elif choice == "2":
+            remove_store_inv(store)
+        elif choice == "3":
+            update_store_inv(store)
+        else:
+            print("Invalid Choice")
+            time.sleep(2)
 
 def view_item_menu():
     while True:
