@@ -27,7 +27,7 @@ class Store_One:
     
     @stock.setter
     def stock(self, stock):
-        if isinstance(stock, int):
+        if isinstance(int(stock), int):
             self._stock = stock
         else:
             raise ValueError("Stock must be an integer")
@@ -66,7 +66,7 @@ class Store_One:
             SET item_id = ?, stock= ?
             WHERE id = ?
         """
-        CURSOR.execute(sql(self.item_id, self.stock, self.id))
+        CURSOR.execute(sql, (self.item_id, self.stock, self.id))
         CONN.commit()
 
     def delete(self):

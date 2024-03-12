@@ -5,22 +5,10 @@ class Store_Two:
     
     all = {}
 
-    def __init__(self, store_id, item_id, stock, id=None):
+    def __init__(self, item_id, stock, id=None):
         self.id = id
-        self.store_id = store_id
         self.item_id = item_id
         self.stock = stock
-
-    @property
-    def store_id(self):
-        return self._store_id
-    
-    @store_id.setter
-    def store_id(self, store_id):
-        if type(store_id) is int and Store_Two.find_by_id(store_id):
-            self._store_id = store_id
-        else:
-            raise ValueError("Store ID must match with a store. Use 'List Stores' to see each store's ID.")
         
     @property
     def item_id(self):
@@ -39,7 +27,7 @@ class Store_Two:
     
     @stock.setter
     def stock(self, stock):
-        if isinstance(stock, int):
+        if isinstance(int(stock), int):
             self._stock = stock
         else:
             raise ValueError("Stock must be an integer")
@@ -50,7 +38,6 @@ class Store_Two:
             CREATE TABLE IF NOT EXISTS store_two (
             id INTEGER PRIMARY KEY,
             item_id INT,
-            store_id INT,
             stock INT)
         """
         CURSOR.execute(sql)
@@ -65,10 +52,10 @@ class Store_Two:
 
     def save(self):
         sql = """
-            INSERT INTO store_two (store_id, item_id, stock)
-            VALUES (?, ?, ?)
+            INSERT INTO store_two (item_id, stock)
+            VALUES (?, ?)
         """
-        CURSOR.execute(sql, (self.store_id, self.item_id, self.stock))
+        CURSOR.execute(sql, (self.item_id, self.stock))
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
@@ -76,10 +63,10 @@ class Store_Two:
     def update(self):
         sql = """
             UPDATE store_two
-            SET store_id = ?, item_id = ?, stock= ?
+            SET item_id = ?, stock= ?
             WHERE id = ?
         """
-        CURSOR.execute(sql(self.store_id, self.item_id, self.stock))
+        CURSOR.execute(sql, (self.item_id, self.stock, self.id))
         CONN.commit()
 
     def delete(self):
@@ -102,11 +89,10 @@ class Store_Two:
     def instance_from_db(cls, row):
         item = cls.all.get(row[0])
         if item:
-            item.store_id = row[1]
-            item.item_id = row[2]
-            item.stock = row[3]
+            item.item_id = row[1]
+            item.stock = row[2]
         else:
-            item = cls(row[1], row[2], row[3])
+            item = cls(row[1], row[2])
             item.id = row[0]
             cls.all[item.id] = item
         return item
