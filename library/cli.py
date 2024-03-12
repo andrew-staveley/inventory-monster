@@ -13,7 +13,7 @@ from helpers import (
     update_store_inv,
     view_item_by_id,
     view_item_by_desc,
-    view_item_by_name,
+    view_item_by_sku,
     view_all_items,
     view_stock_by_id,
     view_stock_by_sku,
@@ -95,7 +95,7 @@ def view_item_menu():
         elif choice == "2":
             view_item_by_desc()
         elif choice == "3":
-            view_item_by_name()
+            view_item_by_sku()
         elif choice == "4":
             view_all_items()
         else:
