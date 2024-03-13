@@ -114,7 +114,7 @@ class Store_Two:
         sql = """
             SELECT *
             FROM store_two
-            WHERE id = ?
+            WHERE item_id = ?
         """
         row = CURSOR.execute(sql, (id)).fetchone()
         return cls.instance_from_db(row) if row else None
@@ -128,3 +128,37 @@ class Store_Two:
         """
         row = CURSOR.execute(sql, (name)).fetchone()
         return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def find_by_sku(cls, sku):
+        sql = """
+            SELECT id
+            FROM master
+            WHERE sku is ?
+        """
+        sql2 = """
+            SELECT item_id
+            FROM store_two
+        """
+        item = CURSOR.execute(sql, (sku,)).fetchone()
+        store_items = CURSOR.execute(sql2).fetchall()
+        for store_item in store_items:
+            if item == store_item:
+                return store_item
+    
+    @classmethod
+    def find_by_desc(cls, desc):
+        sql = """
+            SELECT id
+            FROM master
+            WHERE desc is ?
+        """
+        sql2 = """
+            SELECT item_id
+            FROM store_two
+        """
+        item = CURSOR.execute(sql, (desc,)).fetchone()
+        store_items = CURSOR.execute(sql2).fetchall()
+        for store_item in store_items:
+            if item == store_item:
+                return store_item
