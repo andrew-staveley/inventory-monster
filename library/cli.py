@@ -4,6 +4,8 @@ import os
 import time
 from helpers import (
     sweep_up_shop,
+    error_print,
+    controlled_print,
     exit_program,
     add_master_list,
     remove_master_list,
@@ -42,8 +44,7 @@ def main():
         elif choice == "6":
             reset_database_menu(main)
         else:
-            print("Invalid Choice")
-            time.sleep(2)
+            error_print("Invalid Choice")
 
 def edit_master_list_menu():
     while True:
@@ -58,8 +59,7 @@ def edit_master_list_menu():
         elif choice == "3":
             update_master_list()
         else:
-            print("Invalid Choice")
-            time.sleep(2)
+            error_print("Invalid Choice")
 
 # STORE_ID VALIDATION NEEDED
 def edit_store_list_menu():
@@ -79,8 +79,7 @@ def edit_store_list_menu():
         elif choice == "3":
             update_store_inv(store)
         else:
-            print("Invalid Choice")
-            time.sleep(2)
+            error_print("Invalid Choice")
 
 def view_item_menu():
     while True:
@@ -97,8 +96,7 @@ def view_item_menu():
         elif choice == "4":
             view_all_items()
         else:
-            print("Invalid Choice")
-            time.sleep(2)
+            error_print("Invalid Choice")
 
 #ALSO NEEDS STORE VALIDATION
 def view_stock_menu():
@@ -119,8 +117,7 @@ def view_stock_menu():
         elif choice == "4":
             view_all_stock(store)
         else:
-            print("Invalid Choice")
-            time.sleep(2)
+            error_print("Invalid Choice")
 
 def total_inventory_menu():
     os.system(sweep_up_shop)
@@ -135,8 +132,7 @@ def total_inventory_menu():
             store = input("Please Enter store ID: ")
             store_inventory_worth(store)
         else:
-            print("Invalid Option")
-            time.sleep(2)
+            error_print("Invalid Choice")
 
 def reset_database_menu(cb):
     while True:
@@ -153,25 +149,14 @@ def reset_database_menu(cb):
                 print("Working...")
                 time.sleep(3)
                 seed_database()
-                print("Success")
-                print("")
-                print("Press Enter to Continue")
-                print("")
-                input("> ")
+                controlled_print("Success! Database has been reset.")
                 main()
             elif yn == "n":
                 main()
             else:
-                print("Invalid Input")
-                print("")
-                print("Press Enter to Continue")
-                print("")
-                input("> ")
+                error_print("Invalid Choice")
         else:
-            os.system(sweep_up_shop)
-            print("Password Incorrect")
-            time.sleep(2)
-            os.system(sweep_up_shop)
+            error_print("Password Incorrect")
             main()
 
 def menu():

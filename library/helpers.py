@@ -24,8 +24,10 @@ def error_print(etype):
     print("")
     input("> ")
 
-def controlled_print():
-    print("")
+def controlled_print(message, message2 = ""):
+    os.system(sweep_up_shop)
+    print(message)
+    print(message2)
     print("Press Enter to Continue")
     print("")
     input("> ")
@@ -43,9 +45,7 @@ def add_master_list():
     price = input("Please Enter Price in XXXX.xx Format: ")
     try:
         Master.create(desc, sku, price)
-        os.system(sweep_up_shop)
-        print(f"Success! Item {desc} Added")
-        controlled_print()
+        controlled_print(f"Success! Item {desc} Added")
     except Exception as exc:
         error_print(exc)
 
@@ -53,10 +53,7 @@ def remove_master_list():
     item_id = input("Enter the Item ID: ")
     if item_id := Master.find_by_id(item_id):
         item_id.delete()
-        os.system(sweep_up_shop)
-        print(f"Item {item_id} has been deleted successfully.")
-        print("")
-        controlled_print()
+        controlled_print(f"Item {item_id} has been deleted successfully.")
     else:
         error_print("item_error")
 
@@ -72,9 +69,7 @@ def update_master_list():
             price = input("Enter new item price: ")
             item_id.price = price
             item_id.update()
-            os.system(sweep_up_shop)
-            print(f"Success in updating item {item_id}")
-            controlled_print()
+            controlled_print(f"Success in updating item {item_id}")
         except Exception as exc:
             error_print(exc)
     else:
@@ -86,30 +81,24 @@ def add_store_inv(store):
         item_id = input("Please enter the ID of an item from master: ")
         stock = input("Please enter the stock amount: ")
         try:
-            os.system(sweep_up_shop)
             store_item = Store_One.create(int(item_id), int(stock))
-            print(f"Success! Item {store_item} has been added.")
-            controlled_print()
+            controlled_print(f"Success! Item {store_item} has been added.")
         except Exception as exc:
             error_print(exc)
     elif store == "2":
         item_id = input("Please enter the ID of an item from master: ")
         stock = input("Please enter the stock amount: ")
         try:
-            os.system(sweep_up_shop)
             store_item = Store_Two.create(int(item_id), int(stock))
-            print(f"Success! Item {store_item} has been added.")
-            controlled_print()
+            controlled_print(f"Success! Item {store_item} has been added.")
         except Exception as exc:
             error_print(exc)
     elif store == "3":
         item_id = input("Please enter the ID of an item from master: ")
         stock = input("Please enter the stock amount: ")
         try:
-            os.system(sweep_up_shop)
             store_item = Store_Three.create(int(item_id), int(stock))
-            print(f"Success! Item {store_item} has been added.")
-            controlled_print()
+            controlled_print(f"Success! Item {store_item} has been added.")
         except Exception as exc:
             error_print(exc)
     else:
@@ -120,27 +109,21 @@ def remove_store_inv(store):
         item_id = input("Please Enter Item ID: ")
         if store := Store_One.find_by_id(item_id):
             store.delete()
-            os.system(sweep_up_shop)
-            print("Item has been removed from the master list.")
-            controlled_print()
+            controlled_print("Item has been removed from the master list.")
         else:
             error_print("item_error")
     elif store == "2":
         item_id = input("Please Enter Item ID: ")
         if store := Store_Two.find_by_id(item_id):
             store.delete()
-            os.system(sweep_up_shop)
-            print("Item has been removed from the master list.")
-            controlled_print()
+            controlled_print("Item has been removed from the master list.")
         else:
             error_print("item_error")
     elif store == "3":
         item_id = input("Please Enter Item ID: ")
         if store := Store_Three.find_by_id(item_id):
             store.delete()
-            os.system(sweep_up_shop)
-            print("Item has been removed from the master list.")
-            controlled_print()
+            controlled_print("Item has been removed from the master list.")
         else:
             error_print("item_error")
     else:
@@ -153,10 +136,8 @@ def update_store_inv(store):
             try:
                 stock = input("Enter Stock: ")
                 store.stock = stock
-                os.system(sweep_up_shop)
                 store.update()
-                print("Success. Item Updated")
-                controlled_print()
+                controlled_print("Success. Item Updated")
             except Exception as exc:
                 error_print(exc)
     elif store == "2":
@@ -165,10 +146,8 @@ def update_store_inv(store):
             try:
                 stock = input("Enter Stock: ")
                 store.stock = stock
-                os.system(sweep_up_shop)
                 store.update()
-                print("Success. Item Updated")
-                controlled_print()
+                controlled_print("Success. Item Updated")
             except Exception as exc:
                 error_print(exc)
     elif store == "3":
@@ -177,10 +156,8 @@ def update_store_inv(store):
             try:
                 stock = input("Enter Stock: ")
                 store.stock = stock
-                os.system(sweep_up_shop)
                 store.update()
-                print("Success. Item Updated")
-                controlled_print()
+                controlled_print("Success. Item Updated")
             except Exception as exc:
                 error_print(exc)
     else:
@@ -189,60 +166,49 @@ def update_store_inv(store):
 def view_item_by_id():
     id_ = input("Enter the item's id: ")
     item = Master.find_by_id(id_)
-    os.system(sweep_up_shop)
-    print(item) if item else print(f'Item {id_} not found')
-    controlled_print()
+    controlled_print(item) if item else controlled_print(f'Item {id_} not found')
 
 def view_item_by_desc():
     desc = input("Enter the item's description: ")
     item = Master.find_by_desc(desc)
-    os.system(sweep_up_shop)
-    print(item) if item else print(f"Item {desc} not found")
-    controlled_print()
+    controlled_print(item) if item else controlled_print(f"Item {desc} not found")
 
 def view_item_by_sku():
     sku = input("Enter the item's SKU: ")
     sku_num = int(sku)
     item = Master.find_by_sku(sku_num)
-    os.system(sweep_up_shop)
-    print(item) if item else print(f"Item {sku} not found")
-    controlled_print()
+    controlled_print(item) if item else controlled_print(f"Item {sku} not found")
 
 def view_all_items():
     items = Master.get_all()
+    os.system(sweep_up_shop)
     for item in items:
         print(item)
-    controlled_print()
+    print("")
+    print("Press Enter to Continue")
+    print("")
+    input("> ")
 
 def view_stock_by_id(store):
     if store == "1":
         id_ = input("Please enter item ID: ")
         item = Store_One.find_by_id(id_)
-        os.system(sweep_up_shop)
         if item:
-            print(f"Qty In Stock: {item.stock}")
-            print(Master.find_by_id(item.item_id))
-            controlled_print()
+            controlled_print(f"Qty In Stock: {item.stock}", Master.find_by_id(item.item_id))
         else:
             error_print("item_error")
     elif store == "2":
         id_ = input("Please enter item ID: ")
         item = Store_Two.find_by_id(id_)
-        os.system(sweep_up_shop)
         if item:
-            print(f"Qty In Stock: {item.stock}")
-            print(Master.find_by_id(item.item_id))
-            controlled_print()
+            controlled_print(f"Qty In Stock: {item.stock}", Master.find_by_id(item.item_id))
         else:
             error_print("item_error")
     elif store == "3":
         id_ = input("Please enter item ID: ")
         item = Store_Three.find_by_id(id_)
-        os.system(sweep_up_shop)
         if item:
-            print(f"Qty In Stock: {item.stock}")
-            print(Master.find_by_id(item.item_id))
-            controlled_print()
+            controlled_print(f"Qty In Stock: {item.stock}", Master.find_by_id(item.item_id))
         else:
             error_print("item_error")
     else: 
@@ -253,36 +219,27 @@ def view_stock_by_sku(store):
         sku_ = input("Enter item SKU here: ")
         sku_num = int(sku_)
         item = Store_One.find_by_sku(sku_num)
-        os.system(sweep_up_shop)
         if item:
             store_item = Store_One.find_by_id(item)
-            print(f"Qty In Stock: {store_item.stock}")
-            print(Master.find_by_sku(sku_num))
-            controlled_print()
+            controlled_print(f"Qty In Stock: {store_item.stock}", Master.find_by_sku(sku_num))
         else:
             error_print("item_error")
     elif store == "2":
         sku_ = input("Enter item SKU here: ")
         sku_num = int(sku_)
         item = Store_Two.find_by_sku(sku_num)
-        os.system(sweep_up_shop)
         if item:
             store_item = Store_Two.find_by_id(item)
-            print(f"Qty In Stock: {store_item.stock}")
-            print(Master.find_by_sku(sku_num))
-            controlled_print()
+            controlled_print(f"Qty In Stock: {store_item.stock}", Master.find_by_sku(sku_num))
         else:
             error_print("item_error")
     elif store == "3":
         sku_ = input("Enter item SKU here: ")
         sku_num = int(sku_)
         item = Store_Three.find_by_sku(sku_num)
-        os.system(sweep_up_shop)
         if item:
             store_item = Store_Three.find_by_id(item)
-            print(f"Qty In Stock: {store_item.stock}")
-            print(Master.find_by_sku(sku_num))
-            controlled_print()
+            controlled_print(f"Qty In Stock: {store_item.stock}", Master.find_by_sku(sku_num))
         else:
             error_print("item_error")
     else: 
@@ -292,34 +249,25 @@ def view_stock_by_desc(store):
     if store == "1":
         description = input("Enter Item Description: ")
         item = Store_One.find_by_desc(description)
-        os.system(sweep_up_shop)
         if item:
             store_item = Store_One.find_by_id(item)
-            print(f"Qty In Stock: {store_item.stock}")
-            print(Master.find_by_id(store_item.item_id))
-            controlled_print()
+            controlled_print(f"Qty In Stock: {store_item.stock}", Master.find_by_id(store_item.item_id))
         else:
             error_print("item_error")
     elif store == "2":
         description = input("Enter Item Description: ")
         item = Store_Two.find_by_desc(description)
-        os.system(sweep_up_shop)
         if item:
             store_item = Store_Two.find_by_id(item)
-            print(f"Qty In Stock: {store_item.stock}")
-            print(Master.find_by_id(store_item.item_id))
-            controlled_print()
+            controlled_print(f"Qty In Stock: {store_item.stock}", Master.find_by_id(store_item.item_id))
         else:
             error_print("item_error")
     elif store == "3":
         description = input("Enter Item Description: ")
         item = Store_Three.find_by_desc(description)
-        os.system(sweep_up_shop)
         if item:
             store_item = Store_Three.find_by_id(item)
-            print(f"Qty In Stock: {store_item.stock}")
-            print(Master.find_by_id(store_item.item_id))
-            controlled_print()
+            controlled_print(f"Qty In Stock: {store_item.stock}", Master.find_by_id(store_item.item_id))
         else:
             error_print("item_error")
     else: 
@@ -328,31 +276,44 @@ def view_stock_by_desc(store):
 def view_all_stock(store):
     if store == "1":
         items = Store_One.get_all()
+        os.system(sweep_up_shop)
         for item in items:
             item_info = Master.find_by_id(item.item_id)
             print(item_info)
             print(item)
-        controlled_print()
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
     elif store == "2":
         items = Store_Two.get_all()
+        os.system(sweep_up_shop)
         for item in items:
             item_info = Master.find_by_id(item.item_id)
             print(item_info)
             print(item)
-        controlled_print()
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
     elif store == "3":
         items = Store_Three.get_all()
+        os.system(sweep_up_shop)
         for item in items:
             item_info = Master.find_by_id(item.item_id)
             print(item_info)
             print(item)
-        controlled_print()
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
     else: 
         error_print("store_error")
 
 def total_inventory_worth():
     items = Master.get_all()
     total_value = 0
+    os.system(sweep_up_shop)
     for item in items:
         stock_one = Store_One.find_by_id(item.id)
         stock_two = Store_Two.find_by_id(item.id)
@@ -362,13 +323,17 @@ def total_inventory_worth():
         print(item)
         total_value += (total_stock * item.price)
     print(f"Total Inventory Value: ${total_value}")
-    controlled_print()
+    print("")
+    print("Press Enter to Continue")
+    print("")
+    input("> ")
 
 def store_inventory_worth(store):
     if store == "1":
         items = Master.get_all()
         total_value = 0
         stock = 0
+        os.system(sweep_up_shop)
         for item in items:
             store_item = Store_One.find_by_id(item.id)
             stock = store_item.stock
@@ -376,11 +341,15 @@ def store_inventory_worth(store):
             print(item)
             total_value += (stock * item.price)
         print(f"Total Inventory Value: ${total_value}")
-        controlled_print()
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
     elif store == "2":
         items = Master.get_all()
         total_value = 0
         stock = 0
+        os.system(sweep_up_shop)
         for item in items:
             store_item = Store_Two.find_by_id(item.id)
             stock = store_item.stock
@@ -388,11 +357,15 @@ def store_inventory_worth(store):
             print(item)
             total_value += (stock * item.price)
         print(f"Total Inventory Value: ${total_value}")
-        controlled_print()
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
     elif store == "3":
         items = Master.get_all()
         total_value = 0
         stock = 0
+        os.system(sweep_up_shop)
         for item in items:
             store_item = Store_Three.find_by_id(item.id)
             stock = store_item.stock
@@ -400,6 +373,9 @@ def store_inventory_worth(store):
             print(item)
             total_value += (stock * item.price)
         print(f"Total Inventory Value: ${total_value}")
-        controlled_print()
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
     else: 
         error_print("store_error")
