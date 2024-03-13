@@ -116,7 +116,7 @@ class Store_One:
             FROM store_one
             WHERE item_id = ?
         """
-        row = CURSOR.execute(sql, (id)).fetchone()
+        row = CURSOR.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else None
     
     @classmethod
