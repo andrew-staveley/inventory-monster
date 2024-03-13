@@ -40,8 +40,6 @@ def main():
         elif choice == "5":
             total_inventory_menu()
         elif choice == "6":
-            total_items_menu()
-        elif choice == "7":
             reset_database_menu(main)
         else:
             print("Invalid Choice")
@@ -113,13 +111,13 @@ def view_stock_menu():
         if choice == "0":
             main()
         elif choice == "1":
-            view_stock_by_id()
+            view_stock_by_id(store)
         elif choice == "2":
-            view_stock_by_sku()
+            view_stock_by_sku(store)
         elif choice == "3":
-            view_stock_by_desc()
+            view_stock_by_desc(store)
         elif choice == "4":
-            view_all_stock()
+            view_all_stock(store)
         else:
             print("Invalid Choice")
             time.sleep(2)
@@ -134,13 +132,11 @@ def total_inventory_menu():
         elif choice == "1":
             total_inventory_worth()
         elif choice == "2":
-            store_inventory_worth()
+            store = input("Please Enter store ID: ")
+            store_inventory_worth(store)
         else:
             print("Invalid Option")
             time.sleep(2)
-
-def total_items_menu():
-    pass
 
 def reset_database_menu(cb):
     while True:
@@ -167,7 +163,10 @@ def reset_database_menu(cb):
                 main()
             else:
                 print("Invalid Input")
-                time.sleep(2)
+                print("")
+                print("Press Enter to Continue")
+                print("")
+                input("> ")
         else:
             os.system(sweep_up_shop)
             print("Password Incorrect")
@@ -185,8 +184,7 @@ def menu():
     print("3. View Item Information")
     print("4. View Item Stock")
     print("5. Inventory Worth")
-    print("6. Total Inventory (Under Construction)")
-    print("7. Admin")
+    print("6. Admin")
 
 def edit_master_list_text():
     os.system(sweep_up_shop)
@@ -212,7 +210,6 @@ def store_list_text():
     print("2. Store Two")
     print("3. Store Three")
 
-
 def view_item_text():
     os.system(sweep_up_shop)
     print("How would you like to search for your item?")
@@ -228,8 +225,9 @@ def view_stock_text(store_id):
     print(f"* VIEWING INVENTORY FOR STORE {store_id} *")
     print("0. Main Menu")
     print("1. By ID")
-    print("2. By Name")
-    print("3. Show Entire Stock")
+    print("2. By SKU")
+    print("3. By Description")
+    print("4. Show Entire Stock")
 
 def total_inventory_text():
     os.system(sweep_up_shop)
@@ -238,9 +236,6 @@ def total_inventory_text():
     print("0. Main Menu")
     print("1. Total inventory worth of all stores")
     print("2. Total inventory worth of one store")
-
-def total_items_text():
-    pass
 
 def reset_database_text():
     os.system(sweep_up_shop)
