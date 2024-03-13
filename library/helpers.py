@@ -343,20 +343,273 @@ def view_all_items():
     print("")
     input("> ")
 
-def view_stock_by_id():
-    pass
+def view_stock_by_id(store):
+    if store == "1":
+        id_ = input("Please enter item ID: ")
+        item = Store_One.find_by_id(id_)
+        os.system(sweep_up_shop)
+        if item:
+            print(f"Qty In Stock: {item.stock}")
+            print(Master.find_by_id(item.item_id))
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        else:
+            print("Item Not Found")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+    elif store == "2":
+        id_ = input("Please enter item ID: ")
+        item = Store_Two.find_by_id(id_)
+        os.system(sweep_up_shop)
+        if item:
+            print(f"Qty In Stock: {item.stock}")
+            print(Master.find_by_id(item.item_id))
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        else:
+            print("Item Not Found")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+    elif store == "3":
+        id_ = input("Please enter item ID: ")
+        item = Store_Three.find_by_id(id_)
+        os.system(sweep_up_shop)
+        if item:
+            print(f"Qty In Stock: {item.stock}")
+            print(Master.find_by_id(item.item_id))
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        else:
+            print("Item Not Found")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+    else: 
+        os.system(sweep_up_shop)
+        print("Error")
+        print("")
+        print("Store does not exist. Double check store")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
 
-def view_stock_by_sku():
-    pass
+def view_stock_by_sku(store):
+    if store == "1":
+        sku_ = input("Enter item SKU here: ")
+        sku_num = int(sku_)
+        item = Store_One.find_by_sku(sku_num)
+        os.system(sweep_up_shop)
+        if item:
+            store_item = Store_One.find_by_id(item)
+            print(f"Qty In Stock: {store_item.stock}")
+            print(Master.find_by_sku(sku_num))
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        else:
+            print("Item Not Found")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+    elif store == "2":
+        sku_ = input("Enter item SKU here: ")
+        sku_num = int(sku_)
+        item = Store_Two.find_by_sku(sku_num)
+        os.system(sweep_up_shop)
+        if item:
+            store_item = Store_Two.find_by_id(item)
+            print(f"Qty In Stock: {store_item.stock}")
+            print(Master.find_by_sku(sku_num))
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        else:
+            print("Item Not Found")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+    elif store == "3":
+        sku_ = input("Enter item SKU here: ")
+        sku_num = int(sku_)
+        item = Store_Three.find_by_sku(sku_num)
+        os.system(sweep_up_shop)
+        if item:
+            store_item = Store_Three.find_by_id(item)
+            print(f"Qty In Stock: {store_item.stock}")
+            print(Master.find_by_sku(sku_num))
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        else:
+            print("Item Not Found")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+    else: 
+        os.system(sweep_up_shop)
+        print("Error")
+        print("")
+        print("Store does not exist. Double check store")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
 
-def view_stock_by_desc():
-    pass
+def view_stock_by_desc(store):
+    if store == "1":
+        description = input("Enter Item Description: ")
+        item = Store_One.find_by_desc(description)
+        os.system(sweep_up_shop)
+        if item:
+            store_item = Store_One.find_by_id(item)
+            print(f"Qty In Stock: {store_item.stock}")
+            print(Master.find_by_id(store_item.item_id))
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        else:
+            print("Item Not Found")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+    elif store == "2":
+        description = input("Enter Item Description: ")
+        item = Store_Two.find_by_desc(description)
+        os.system(sweep_up_shop)
+        if item:
+            store_item = Store_Two.find_by_id(item)
+            print(f"Qty In Stock: {store_item.stock}")
+            print(Master.find_by_id(store_item.item_id))
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        else:
+            print("Item Not Found")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+    elif store == "3":
+        description = input("Enter Item Description: ")
+        item = Store_Three.find_by_desc(description)
+        os.system(sweep_up_shop)
+        if item:
+            store_item = Store_Three.find_by_id(item)
+            print(f"Qty In Stock: {store_item.stock}")
+            print(Master.find_by_id(store_item.item_id))
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+        else:
+            print("Item Not Found")
+            print("")
+            print("Press Enter to Continue")
+            print("")
+            input("> ")
+    else: 
+        os.system(sweep_up_shop)
+        print("Error")
+        print("")
+        print("Store does not exist. Double check store")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
 
-def view_all_stock():
-    pass
+def view_all_stock(store):
+    if store == "1":
+        items = Store_One.get_all()
+        for item in items:
+            item_info = Master.find_by_id(item.item_id)
+            print(item_info)
+            print(item)
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
+    elif store == "2":
+        items = Store_Two.get_all()
+        for item in items:
+            item_info = Master.find_by_id(item.item_id)
+            print(item_info)
+            print(item)
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
+    elif store == "3":
+        items = Store_Three.get_all()
+        for item in items:
+            item_info = Master.find_by_id(item.item_id)
+            print(item_info)
+            print(item)
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
+    else: 
+        os.system(sweep_up_shop)
+        print("Error")
+        print("")
+        print("Store does not exist. Double check store")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
+
 
 def total_inventory_worth():
-    pass
+    items = Master.get_all()
+    total_value = 0
+    for item in items:
+        stock_one = Store_One.find_by_id(item.id)
+        stock_two = Store_Two.find_by_id(item.id)
+        stock_three = Store_Three.find_by_id(item.id)
+        total_stock = stock_one.stock + stock_two.stock + stock_three.stock
+        print(f"Total {item.desc} Value Across Stores: $", total_stock * item.price)
+        print(item)
+        total_value += (total_stock * item.price)
+    print(f"Total Inventory Value: ${total_value}")
+    print("")
+    print("Press Enter to Continue")
+    print("")
+    input("> ")
 
-def store_inventory_worth():
-    pass
+def store_inventory_worth(store):
+    if store == "1":
+        pass
+    elif store == "2":
+        pass
+    elif store == "3":
+        pass
+    else: 
+        os.system(sweep_up_shop)
+        print("Error")
+        print("")
+        print("Store does not exist. Double check store")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
