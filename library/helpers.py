@@ -599,11 +599,50 @@ def total_inventory_worth():
 
 def store_inventory_worth(store):
     if store == "1":
-        pass
+        items = Master.get_all()
+        total_value = 0
+        stock = 0
+        for item in items:
+            store_item = Store_One.find_by_id(item.id)
+            stock = store_item.stock
+            print(f"Total {item.desc} Value: $", stock * item.price)
+            print(item)
+            total_value += (stock * item.price)
+        print(f"Total Inventory Value: ${total_value}")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
     elif store == "2":
-        pass
+        items = Master.get_all()
+        total_value = 0
+        stock = 0
+        for item in items:
+            store_item = Store_Two.find_by_id(item.id)
+            stock = store_item.stock
+            print(f"Total {item.desc} Value: $", stock * item.price)
+            print(item)
+            total_value += (stock * item.price)
+        print(f"Total Inventory Value: ${total_value}")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
     elif store == "3":
-        pass
+        items = Master.get_all()
+        total_value = 0
+        stock = 0
+        for item in items:
+            store_item = Store_Three.find_by_id(item.id)
+            stock = store_item.stock
+            print(f"Total {item.desc} Value: $", stock * item.price)
+            print(item)
+            total_value += (stock * item.price)
+        print(f"Total Inventory Value: ${total_value}")
+        print("")
+        print("Press Enter to Continue")
+        print("")
+        input("> ")
     else: 
         os.system(sweep_up_shop)
         print("Error")
