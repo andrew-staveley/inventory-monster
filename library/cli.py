@@ -25,6 +25,8 @@ from helpers import (
     store_inventory_worth,
     )
 
+user_password = "password"
+
 def main():
     while True:
         menu()
@@ -138,7 +140,7 @@ def reset_database_menu(cb):
     while True:
         reset_database_text()
         password_entered = input(">>> ")
-        if password_entered == "password":
+        if password_entered == user_password:
             os.system(sweep_up_shop)
             print("Hello User, are you sure you want to reset the database?")
             print("Note: This will seed the database with sample data")
