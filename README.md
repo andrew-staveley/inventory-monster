@@ -12,6 +12,5 @@ sku, and price.
 ### Admin Menu
 
 The admin menu (option 6) allows the primary user to completely reset the database to a small set of items.
-The current password for the admin menu is:
-`password`
-To change this password, line 28 in `inventory-monster/library/cli.py`
+The current password for the admin menu is `password`.
+To change the password, update `user_password` on line 28 in `inventory-monster/library/cli.py`
